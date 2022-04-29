@@ -15,4 +15,4 @@ with open('file.yaml', 'w', encoding='utf-8') as f_in:
 with open('file.yaml', 'r', encoding='utf-8') as f_out:
     data_yaml = yaml.load(f_out, Loader=yaml.SafeLoader)
 
-print(data_yaml)
+print(data_files == data_yaml)
