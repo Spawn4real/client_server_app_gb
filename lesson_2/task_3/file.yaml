@@ -3,7 +3,7 @@ items:
 - printer
 - gamepad
 price:
-  computer: "100\u20BD"
-  gamepad: "300\u20BD"
-  printer: "200\u20BD"
+  computer: 100₽
+  gamepad: 300₽
+  printer: 200₽
 quantity: 5
