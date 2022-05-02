@@ -1,5 +1,4 @@
-Изготовитель системы,Windows,Тип системы,Код продукта
-"['LENOVO', 'ACER', 'DELL']","['Windows:  ', 'Windows:  ', 'Windows:  ']","['x64-based', 'x64-based', 'x86-based']","['00971-OEM-1982661-00231', '00971-OEM-1982661-00231', '00971-OEM-1982661-00231']"
-LENOVO,Windows:  ,x64-based,00971-OEM-1982661-00231
-ACER,Windows:  ,x64-based,00971-OEM-1982661-00231
-DELL,Windows:  ,x86-based,00971-OEM-1982661-00231
+Изготовитель системы,Windows,Тип системы,Код продукта
+LENOVO,Windows 7,x64-based,00971-OEM-1982661-00231
+ACER,Windows 10,x64-based,00971-OEM-1982661-00231
+DELL,Windows 8.1,x86-based,00971-OEM-1982661-00231
