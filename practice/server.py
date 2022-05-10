@@ -3,9 +3,9 @@
 import sys
 import json
 import socket
-from practice.common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, \
+from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, \
     DEFAULT_PORT, MAX_CONNECTIONS
-from practice.common.utils import send_messages, get_messages
+from common.utils import send_messages, get_messages
 
 
 def procces_client_message(message):
