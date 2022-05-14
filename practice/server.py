@@ -8,7 +8,7 @@ from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONS
 from common.utils import send_messages, get_messages
 
 
-def procces_client_message(message):
+def process_client_message(message):
     if ACTION in message and message[ACTION] == PRESENCE and TIME in message and USER in message \
             and message[USER][ACCOUNT_NAME] == 'Guest':
         return {RESPONSE: 200}
@@ -50,7 +50,7 @@ def main():
         try:
             message_from_client = get_messages(client)
             print(message_from_client)
-            response = procces_client_message(message_from_client)
+            response = process_client_message(message_from_client)
             send_messages(client, response)
             client.close()
         except (ValueError, json.JSONDecodeError):
