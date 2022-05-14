@@ -4,8 +4,8 @@ import sys
 import json
 import socket
 import time
-from practice.common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, DEFAULT_IP, DEFAULT_PORT
-from practice.common.utils import send_messages, get_messages
+from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, DEFAULT_IP, DEFAULT_PORT
+from common.utils import send_messages, get_messages
 
 
 def create_presense(account_name='Guest'):
