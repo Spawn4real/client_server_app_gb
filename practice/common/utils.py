@@ -1,7 +1,7 @@
 """ОБЩИЕ ФУНКЦИИ"""
 
 import json
-from variables import MAX_PACKAGES_LEN, ENCODING
+from common.variables import MAX_PACKAGES_LEN, ENCODING
 
 
 # Фуннкция приема и декодирования сообщения. Принимает байты и выдает словарь, иначе возращает ValueError
