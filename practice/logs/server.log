@@ -20,3 +20,21 @@
 2022-05-19 19:58:34,873 DEBUG decos.py Была вызвана функция process_client_message с параметрами ({'action': 'presence', 'time': 1652965114.8708794, 'user': {'account_name': 'Guest'}},), {}Выхов из модуля __main__Вызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
 2022-05-19 19:58:34,873 INFO server.py Cформирован ответ клиенту {'responce': 200}
 2022-05-19 19:58:34,873 DEBUG server.py Соединение с клиентом ('127.0.0.1', 39456) закрывается.
+2022-05-19 20:04:02,227 DEBUG decos.py Была вызвана функция create_arg_parser с параметрами (), {}Выхов из модуля __main__Вызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:04:02,227 INFO server.py Запущен сервер, порт для подключений: 6666, адрес с которого принимаются подключения: . Если адрес не указан, принимаются соединения с любых адресов.
+2022-05-19 20:04:05,755 INFO server.py Установлено соедение с ПК ('127.0.0.1', 39458)
+2022-05-19 20:04:05,756 DEBUG decos.py Была вызвана функция get_messages с параметрами (<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6666), raddr=('127.0.0.1', 39458)>,), {}Выхов из модуля common.utilsВызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:04:05,756 DEBUG server.py Получено сообщение {'action': 'presence', 'time': 1652965445.7555463, 'user': {'account_name': 'Guest'}}
+2022-05-19 20:04:05,756 DEBUG server.py Разбор сообщений от клиента: {'action': 'presence', 'time': 1652965445.7555463, 'user': {'account_name': 'Guest'}}
+2022-05-19 20:04:05,757 DEBUG decos.py Была вызвана функция process_client_message с параметрами ({'action': 'presence', 'time': 1652965445.7555463, 'user': {'account_name': 'Guest'}},), {}Выхов из модуля __main__Вызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:04:05,757 INFO server.py Cформирован ответ клиенту {'responce': 200}
+2022-05-19 20:04:05,758 DEBUG decos.py Была вызвана функция send_messages с параметрами (<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6666), raddr=('127.0.0.1', 39458)>, {'responce': 200}), {}Выхов из модуля common.utilsВызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:04:05,758 DEBUG server.py Соединение с клиентом ('127.0.0.1', 39458) закрывается.
+2022-05-19 20:06:12,695 INFO server.py Установлено соедение с ПК ('127.0.0.1', 39460)
+2022-05-19 20:06:12,696 DEBUG decos.py Была вызвана функция get_messages с параметрами (<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6666), raddr=('127.0.0.1', 39460)>,), {}Выхов из модуля common.utilsВызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:06:12,697 DEBUG server.py Получено сообщение {'action': 'presence', 'time': 1652965572.695547, 'user': {'account_name': 'Guest'}}
+2022-05-19 20:06:12,697 DEBUG server.py Разбор сообщений от клиента: {'action': 'presence', 'time': 1652965572.695547, 'user': {'account_name': 'Guest'}}
+2022-05-19 20:06:12,697 DEBUG decos.py Была вызвана функция process_client_message с параметрами ({'action': 'presence', 'time': 1652965572.695547, 'user': {'account_name': 'Guest'}},), {}Выхов из модуля __main__Вызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:06:12,697 INFO server.py Cформирован ответ клиенту {'responce': 200}
+2022-05-19 20:06:12,698 DEBUG decos.py Была вызвана функция send_messages с параметрами (<socket.socket fd=6, family=AddressFamily.AF_INET, type=SocketKind.SOCK_STREAM, proto=0, laddr=('127.0.0.1', 6666), raddr=('127.0.0.1', 39460)>, {'responce': 200}), {}Выхов из модуля common.utilsВызов из функции main()Вызов из функции main@@@Вызов из цункции main@@@Вызов из функции home
+2022-05-19 20:06:12,698 DEBUG server.py Соединение с клиентом ('127.0.0.1', 39460) закрывается.
