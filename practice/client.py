@@ -10,11 +10,12 @@ from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONS
 from common.utils import send_messages, get_messages
 import logs.config_client_log
 from errors import ReqFieldMissingError
+from decos import log
+
+logger = logging.getLogger('client')
 
 
-client_logger = logging.getLogger('client')
-
-
+@log
 def create_presense(account_name='Guest'):
     out = {
         ACTION: PRESENCE,
@@ -23,12 +24,13 @@ def create_presense(account_name='Guest'):
             ACCOUNT_NAME: account_name
         },
     }
-    client_logger.debug(f'Сформировано {PRESENCE} сообщения для пользователя {account_name}')
+    logger.debug(f'Сформировано {PRESENCE} сообщения для пользователя {account_name}')
     return out
 
 
+@log
 def procces_ans(message):
-    client_logger.debug(f'Разбор сообщения от сервера: {message}')
+    logger.debug(f'Разбор сообщения от сервера: {message}')
     if RESPONSE in message:
         if message[RESPONSE] == 200:
             return '200 : OK'
@@ -36,6 +38,7 @@ def procces_ans(message):
     raise ReqFieldMissingError
 
 
+@log
 def create_arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('addr', default=DEFAULT_IP, nargs='?')
@@ -43,6 +46,7 @@ def create_arg_parser():
     return parser
 
 
+@log
 def main():
     parser = create_arg_parser()
     namespace = parser.parse_args(sys.argv[1:])
@@ -51,12 +55,12 @@ def main():
 
     # проверим подходящий номер порта
     if not 1023 < server_port < 65536:
-        client_logger.critical(
+        logger.critical(
             f'Попытка запуска клиента с неподходящим номером порта: {server_port}.'
             f' Допустимы адреса с 1024 до 65535. Клиент завершается.')
         sys.exit(1)
 
-    client_logger.info(f'Запущен клиент с парамертами: '
+    logger.info(f'Запущен клиент с парамертами: '
                        f'адрес сервера: {server_address}, порт: {server_port}')
 
     # Инициализация сокета и обмен
@@ -66,15 +70,15 @@ def main():
         message_to_server = create_presense()
         send_messages(transport, message_to_server)
         answer = procces_ans(get_messages(transport))
-        client_logger.info(f'Принят ответ от сервера {answer}')
+        logger.info(f'Принят ответ от сервера {answer}')
         print(answer)
     except json.JSONDecodeError:
-        client_logger.error('Не удалось декодировать полученную Json строку.')
+        logger.error('Не удалось декодировать полученную Json строку.')
     except ReqFieldMissingError as missing_error:
-        client_logger.error(f'В ответе сервера отсутствует необходимое поле '
+        logger.error(f'В ответе сервера отсутствует необходимое поле '
                             f'{missing_error.missing_field}')
     except ConnectionRefusedError:
-        client_logger.critical(f'Не удалось подключиться к серверу {server_address}:{server_port}, '
+        logger.critical(f'Не удалось подключиться к серверу {server_address}:{server_port}, '
                                f'конечный компьютер отверг запрос на подключение.')
 
 
