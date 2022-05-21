@@ -1,6 +1,8 @@
 """ПЕРЕМЕННЫЕ ПО УМОЛЧАНИЮ"""
 
 # Порт по умолчанию
+import logging
+
 DEFAULT_PORT = 6666
 # IP Адрес по умолчанию для клиента
 DEFAULT_IP = '127.0.0.1'
@@ -10,6 +12,8 @@ MAX_CONNECTIONS = 10
 MAX_PACKAGES_LEN = 1024
 # Кодировка
 ENCODING = 'utf-8'
+# Уровень логгирования
+LOGGING_LEVEL = logging.DEBUG
 
 
 ACTION = 'action'

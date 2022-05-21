@@ -3,58 +3,75 @@
 import sys
 import json
 import socket
+import argparse
+import logging
+import logs.config_server_log
+from errors import IncorrectDataRecivedError
 from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, \
     DEFAULT_PORT, MAX_CONNECTIONS
 from common.utils import send_messages, get_messages
 
+server_logger = logging.getLogger('server')
+
 
 def process_client_message(message):
+    server_logger.debug(f'Разбор сообщений от клиента: {message}')
     if ACTION in message and message[ACTION] == PRESENCE and TIME in message and USER in message \
             and message[USER][ACCOUNT_NAME] == 'Guest':
         return {RESPONSE: 200}
-    return f'400 : {message[ERROR]}'
+    return {
+        RESPONSE: 400,
+        ERROR: 'Bad Request'
+    }
+
+
+def create_arg_parser():
+    parser = argparse.ArgumentParser()
+    parser.add_argument('-p', default=DEFAULT_PORT, type=int, nargs='?')
+    parser.add_argument('-a', default='', nargs='?')
+    return parser
 
 
 def main():
-    try:
-        if '-p' in sys.argv:
-            listen_port = int(sys.argv[sys.argv.index('-p') + 1])
-        else:
-            listen_port = DEFAULT_PORT
-        if listen_port < 1024 or listen_port > 65535:
-            raise ValueError
-    except IndexError:
-        print("После параметра -\'p\' - необходимо указать порт.")
-        sys.exit(1)
-    except ValueError:
-        print('Номер порта может быть только в диапозоне от 1024 жл 65535')
-        sys.exit(1)
+    parser = create_arg_parser()
+    namespace = parser.parse_args(sys.argv[1:])
+    listen_address = namespace.a
+    listen_port = namespace.p
 
-    try:
-        if '-a' in sys.argv:
-            listen_adress = sys.argv[sys.argv.index('-a') + 1]
-        else:
-            listen_adress = ''
-    except IndexError:
-        print('После параметра -\'a\' необходимо указать адрес, который будет слушать сервер.')
+    # проверка получения корретного номера порта для работы сервера.
+    if not 1023 < listen_port < 65536:
+        server_logger.critical(f'Попытка запуска сервера с указанием неподходящего порта '
+                               f'{listen_port}. Допустимы адреса с 1024 до 65535.')
         sys.exit(1)
+    server_logger.info(f'Запущен сервер, порт для подключений: {listen_port}, '
+                       f'адрес с которого принимаются подключения: {listen_address}. '
+                       f'Если адрес не указан, принимаются соединения с любых адресов.')
 
+   # Готовим сокет
     transport = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-    transport.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-    transport.bind((listen_adress, listen_port))
+    transport.bind((listen_address, listen_port))
 
+    # Слушаем порт
     transport.listen(MAX_CONNECTIONS)
 
     while True:
-        client, client_adress = transport.accept()
+        client, client_address = transport.accept()
+        server_logger.info(f'Установлено соедение с ПК {client_address}')
         try:
-            message_from_client = get_messages(client)
-            print(message_from_client)
-            response = process_client_message(message_from_client)
+            message_from_cient = get_messages(client)
+            server_logger.debug(f'Получено сообщение {message_from_cient}')
+            response = process_client_message(message_from_cient)
+            server_logger.info(f'Cформирован ответ клиенту {response}')
             send_messages(client, response)
+            server_logger.debug(f'Соединение с клиентом {client_address} закрывается.')
             client.close()
-        except (ValueError, json.JSONDecodeError):
-            print('Принято некорректное сообщение от клиента.')
+        except json.JSONDecodeError:
+            server_logger.error(f'Не удалось декодировать JSON строку, полученную от '
+                                f'клиента {client_address}. Соединение закрывается.')
+            client.close()
+        except IncorrectDataRecivedError:
+            server_logger.error(f'От клиента {client_address} приняты некорректные данные. '
+                                f'Соединение закрывается.')
             client.close()
 
 
