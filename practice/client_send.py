@@ -19,12 +19,11 @@ logger = logging.getLogger('client')
 
 @log
 def message_from_server(message):
-    if ACTION in message and message[ACTION] == MESSAGE and \
-            SENDER in message and MESSAGE_TEXT in message:
-        print(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
-        logger.info(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
+    if ACTION in message and message[ACTION] == MESSAGE and SENDER in message and MESSAGE_TEXT in message:
+        print(f'Получено сообщение от пользователя {message[SENDER]}:{message[MESSAGE_TEXT]}')
+        logger.info(f'Получено сообщение от пользователя {message[SENDER]}:{message[MESSAGE_TEXT]}')
     else:
-        logger.error(f'Получено некорректное сообщение с сервера: {message}')
+        logger.error(f'Получено сообщение от пользователя {message[SENDER]}:{message[MESSAGE_TEXT]}')
 
 
 def create_message(sock, account_name='Guest'):
@@ -59,7 +58,7 @@ def create_presence(account_name='Guest'):
 
 
 @log
-def process_response_ans(message):
+def procces_response_ans(message):
     logger.debug(f'Разбор приветсвенного сообщения от сервера: {message}')
     if RESPONSE in message:
         if message[RESPONSE] == 200:
@@ -74,7 +73,7 @@ def arg_parser():
     parser = argparse.ArgumentParser()
     parser.add_argument('addr', default=DEFAULT_IP, nargs='?')
     parser.add_argument('port', default=DEFAULT_PORT, type=int, nargs='?')
-    parser.add_argument('-m', '--mode', default='listen', nargs='?')
+    parser.add_argument('-m', '--mode', default='send', nargs='?')
     namespace = parser.parse_args(sys.argv[1:])
     server_address = namespace.addr
     server_port = namespace.port
@@ -111,9 +110,9 @@ def main():
         transport = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         transport.connect((server_address, server_port))
         send_message(transport, create_presence())
-        answer = process_response_ans(get_message(transport))
-        logger.info(f'Установлено соединение с сервером. Ответ сервера: {answer}')
-        print('Установлено соединение с сервером.')
+        answer = procces_response_ans(get_message(transport))
+        logger.info(f'Установлено соеденение с сервером. Ответ сервера: {answer}')
+        print('Установлено соеденение с сервером.')
     except json.JSONDecodeError:
         logger.error('Не удалось декодировать полученную Json строку.')
         sys.exit(1)

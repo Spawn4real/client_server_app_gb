@@ -10,7 +10,7 @@ from decos import log
 
 # Фуннкция приема и декодирования сообщения. Принимает байты и выдает словарь, иначе возращает ValueError
 @log
-def get_messages(client):
+def get_message(client):
     encoding_response = client.recv(MAX_PACKAGES_LEN)
     if isinstance(encoding_response, bytes):
         json_response = encoding_response.decode(ENCODING)
@@ -26,10 +26,10 @@ def get_messages(client):
 # Функция отправки сообщения и кодирования. Принимает в себя словарь, если нет выводит TypeError,
 # получает из него строку, переводит в байты и отправляет.
 @log
-def send_messages(sock, message):
+def send_message(sock, message):
     if not isinstance(message, dict):
         raise NonDictInputError
     js_message = json.dumps(message)
-    encoding_messege = js_message.encode(ENCODING)
-    sock.send(encoding_messege)
+    encoding_message = js_message.encode(ENCODING)
+    sock.send(encoding_message)
 
