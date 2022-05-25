@@ -34,8 +34,8 @@ def message_from_server(sock, my_username):
         try:
             message = get_message(sock)
             if ACTION in message and message[ACTION] == MESSAGE and \
-                SENDER in message and DESTINATION in message and MESSAGE_TEXT in message \
-                    and message[DESTINATION == my_username]:
+                SENDER in message and DESTINATION in message \
+                and MESSAGE_TEXT in message and message[DESTINATION] == my_username:
                 print(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
                 logger.info(f'Получено сообщение от пользователя {message[SENDER]}:\n{message[MESSAGE_TEXT]}')
             else:
