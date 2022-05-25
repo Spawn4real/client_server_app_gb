@@ -3,7 +3,7 @@
 # Порт по умолчанию
 import logging
 
-DEFAULT_PORT = 6666
+DEFAULT_PORT = 7777
 # IP Адрес по умолчанию для клиента
 DEFAULT_IP = '127.0.0.1'
 # Максимальное количество подключений
@@ -31,6 +31,8 @@ ACCOUNT_NAME = 'account_name'
 
 SENDER = 'sender'
 
+DESTINATION = 'to'
+
 RESPONSE = 'responce'
 
 ERROR = 'error'
@@ -38,3 +40,5 @@ ERROR = 'error'
 MESSAGE = 'message'
 
 MESSAGE_TEXT = 'message_text'
+
+EXIT = 'exit'
