@@ -11,7 +11,6 @@ import logs.config_client_log
 from common.utils import send_message, get_message
 from common.variables import ACTION, PRESENCE, TIME, USER, ACCOUNT_NAME, RESPONSE, ERROR, DEFAULT_IP, DEFAULT_PORT, \
     SENDER, MESSAGE, MESSAGE_TEXT, EXIT, DESTINATION
-
 from decos import log
 from errors import ReqFieldMissingError, ServerError, IncorrectDataRecivedError
 
