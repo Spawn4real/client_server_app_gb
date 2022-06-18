@@ -14,8 +14,8 @@ MAX_PACKAGES_LEN = 1024
 ENCODING = 'utf-8'
 # Уровень логгирования
 LOGGING_LEVEL = logging.DEBUG
-#
-
+# База данных для хранения данных сервера:
+SERVER_DATABASE = 'sqlite:///server_base.db3'
 #
 
 
@@ -42,3 +42,13 @@ MESSAGE = 'message'
 MESSAGE_TEXT = 'message_text'
 
 EXIT = 'exit'
+
+GET_CONTACTS = 'get_contacts'
+
+LIST_INFO = 'data_list'
+
+REMOVE_CONTACT = 'remove'
+
+ADD_CONTACT = 'add'
+
+USERS_REQUEST = 'get_users'
