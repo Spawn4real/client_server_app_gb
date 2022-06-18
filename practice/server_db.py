@@ -258,3 +258,17 @@ class ServerStorage:
         return query.all()
 
 
+if __name__ == '__main__':
+    test_db = ServerStorage()
+    test_db.user_login('1111', '192.168.1.113', 8080)
+    test_db.user_login('McG2', '192.168.1.113', 8081)
+    print(test_db.users_list())
+    print(test_db.active_users_list())
+    test_db.user_logout('McG')
+    print(test_db.login_history('re'))
+    test_db.add_contact('test2', 'test1')
+    test_db.add_contact('test1', 'test3')
+    test_db.add_contact('test1', 'test6')
+    test_db.remove_contact('test1', 'test3')
+    test_db.process_message('McG2', '1111')
+    print(test_db.message_history())

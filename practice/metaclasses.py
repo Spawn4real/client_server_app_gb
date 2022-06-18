@@ -2,6 +2,7 @@ import dis
 
 from pprint import pprint
 
+
 class ServerMaker(type):
     def __init__(cls, clsname, bases, clsdict):
         methods = []

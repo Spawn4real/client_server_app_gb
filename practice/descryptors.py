@@ -1,6 +1,14 @@
 import logging
+import sys
 logger = logging.getLogger('server_dist')
 
+
+if sys.argv[0].find('client_dist') == -1:
+    # если не клиент то сервер!
+    logger = logging.getLogger('server_dist')
+else:
+    # ну, раз не сервер, то клиент
+    logger = logging.getLogger('client_dist')
 
 # Дескриптор для описания порта:
 class Port:
