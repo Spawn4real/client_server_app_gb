@@ -17,7 +17,7 @@ LOGGING_LEVEL = logging.DEBUG
 # База данных для хранения данных сервера:
 SERVER_DATABASE = 'sqlite:///server_base.db3'
 #
-
+SERVER_CONFIG = 'serever_dist+++.ini'
 
 ACTION = 'action'
 
@@ -32,6 +32,10 @@ ACCOUNT_NAME = 'account_name'
 SENDER = 'sender'
 
 DESTINATION = 'to'
+
+DATA = 'bin'
+
+PUBLIC_KEY = 'pubkey'
 
 RESPONSE = 'responce'
 
@@ -53,7 +57,13 @@ ADD_CONTACT = 'add'
 
 USERS_REQUEST = 'get_users'
 
-RESPONSE_200 = {RESPONSE: 200}
+PUBLIC_KEY_REQUEST = 'pubkey_need'
+
+
+
+RESPONSE_200 = {
+    RESPONSE: 200
+}
 
 RESPONSE_202 = {
     RESPONSE: 202,
@@ -63,4 +73,13 @@ RESPONSE_202 = {
 RESPONSE_400 = {
     RESPONSE: 400,
     ERROR: None
+}
+
+RESPONSE_205 = {
+    RESPONSE: 205,
+}
+
+RESPONSE_511 = {
+    RESPONSE: 511,
+    DATA: None
 }
