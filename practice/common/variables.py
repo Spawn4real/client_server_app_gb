@@ -15,9 +15,7 @@ ENCODING = 'utf-8'
 # Уровень логгирования
 LOGGING_LEVEL = logging.DEBUG
 #
-
-#
-
+SERVER_CONFIG = 'serever_dist+++.ini'
 
 ACTION = 'action'
 
@@ -33,6 +31,10 @@ SENDER = 'sender'
 
 DESTINATION = 'to'
 
+DATA = 'bin'
+
+PUBLIC_KEY = 'pubkey'
+
 RESPONSE = 'responce'
 
 ERROR = 'error'
@@ -42,3 +44,40 @@ MESSAGE = 'message'
 MESSAGE_TEXT = 'message_text'
 
 EXIT = 'exit'
+
+GET_CONTACTS = 'get_contacts'
+
+LIST_INFO = 'data_list'
+
+REMOVE_CONTACT = 'remove'
+
+ADD_CONTACT = 'add'
+
+USERS_REQUEST = 'get_users'
+
+PUBLIC_KEY_REQUEST = 'pubkey_need'
+
+
+
+RESPONSE_200 = {
+    RESPONSE: 200
+}
+
+RESPONSE_202 = {
+    RESPONSE: 202,
+    LIST_INFO: None
+}
+
+RESPONSE_400 = {
+    RESPONSE: 400,
+    ERROR: None
+}
+
+RESPONSE_205 = {
+    RESPONSE: 205,
+}
+
+RESPONSE_511 = {
+    RESPONSE: 511,
+    DATA: None
+}
