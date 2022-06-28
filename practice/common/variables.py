@@ -14,8 +14,6 @@ MAX_PACKAGES_LEN = 1024
 ENCODING = 'utf-8'
 # Уровень логгирования
 LOGGING_LEVEL = logging.DEBUG
-# База данных для хранения данных сервера:
-SERVER_DATABASE = 'sqlite:///server_base.db3'
 #
 SERVER_CONFIG = 'serever_dist+++.ini'
 

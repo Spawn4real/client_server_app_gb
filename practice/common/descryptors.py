@@ -1,8 +1,10 @@
 import logging
 import sys
+
+# Инициализиция логера
 logger = logging.getLogger('server_dist')
 
-
+# метод определения модуля, источника запуска.
 if sys.argv[0].find('client_dist') == -1:
     # если не клиент то сервер!
     logger = logging.getLogger('server_dist')
@@ -10,8 +12,13 @@ else:
     # ну, раз не сервер, то клиент
     logger = logging.getLogger('client_dist')
 
-# Дескриптор для описания порта:
+
 class Port:
+    """
+        Класс - дескриптор для номера порта.
+        Позволяет использовать только порты с 1023 по 65536.
+        При попытке установить неподходящий номер порта генерирует исключение.
+    """
     def __set__(self, instance, value):
         if not 1023 < value < 65536:
             logger.critical(

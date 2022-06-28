@@ -8,8 +8,8 @@ import binascii
 import os
 import sys
 sys.path.append('../')
-from metaclasses import ServerMaker
-from descryptors import Port
+from common.metaclasses import ServerMaker
+from common.descryptors import Port
 from common.variables import RESPONSE, ACTION, USER, PRESENCE, TIME, ACCOUNT_NAME, ERROR, MESSAGE, MESSAGE_TEXT, \
     SENDER, DESTINATION, GET_CONTACTS, LIST_INFO, USERS_REQUEST, ADD_CONTACT, REMOVE_CONTACT, EXIT, RESPONSE_400, \
     RESPONSE_200, RESPONSE_202, RESPONSE_205, PUBLIC_KEY_REQUEST, RESPONSE_511, MAX_CONNECTIONS, DATA, \
@@ -58,7 +58,7 @@ class MessageProcessor(threading.Thread):
         super().__init__()
 
     def run(self):
-        '''Метод основной цикл потока.'''
+        """Метод основной цикл потока."""
         # Инициализация Сокета
         self.init_socket()
 
@@ -96,10 +96,10 @@ class MessageProcessor(threading.Thread):
                         self.remove_client(client_with_message)
 
     def remove_client(self, client):
-        '''
+        """
         Метод обработчик клиента с которым прервана связь.
         Ищет клиента и удаляет его из списков и базы:
-        '''
+        """
         logger.info(f'Клиент {client.getpeername()} отключился от сервера.')
         for name in self.names:
             if self.names[name] == client:
@@ -110,7 +110,7 @@ class MessageProcessor(threading.Thread):
         client.close()
 
     def init_socket(self):
-        '''Метод инициализатор сокета.'''
+        """Метод инициализатор сокета."""
         logger.info(
             f'Запущен сервер, порт для подключений: {self.port} , адрес с которого принимаются подключения: \
                 {self.addr}. Если адрес не указан, принимаются соединения с любых адресов.')
@@ -125,9 +125,9 @@ class MessageProcessor(threading.Thread):
         self.sock.listen(MAX_CONNECTIONS)
 
     def process_message(self, message):
-        '''
+        """
         Метод отправки сообщения клиенту.
-        '''
+        """
         if message[DESTINATION] in self.names and self.names[message[DESTINATION]
         ] in self.listen_sockets:
             try:
@@ -322,7 +322,7 @@ class MessageProcessor(threading.Thread):
                 sock.close()
 
     def service_update_lists(self):
-        '''Метод реализующий отправки сервисного сообщения 205 клиентам.'''
+        """Метод реализующий отправки сервисного сообщения 205 клиентам."""
         for client in self.names:
             try:
                 send_message(self.names[client], RESPONSE_205)

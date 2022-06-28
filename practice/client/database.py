@@ -23,9 +23,9 @@ class ClientDatabase:
             self.username = user
 
     class MessageStat:
-        '''
+        """
         Класс - отображение для таблицы статистики переданных сообщений.
-        '''
+        """
         def __init__(self, contact, direction, message):
             self.id = None
             self.contact = contact
@@ -34,9 +34,9 @@ class ClientDatabase:
             self.date = datetime.datetime.now()
 
     class Contacts:
-        '''
+        """
         Класс - отображение для таблицы контактов.
-        '''
+        """
         def __init__(self, contact):
             self.id = None
             self.name = contact
